@@ -150,6 +150,7 @@ componentDidMount: function () {
 ```
 
 On component load we need to `setStyles` since we currently don’t have any styles to get! Remember, the component is going to call `.getClientRect()` which is going to dynamically set positioning values. Additionally, we don’t want to query the DOM every time we resize the viewport.
+<Test />
 
 ```js
   , shouldComponentUpdate: function (nextProps, nextState) {

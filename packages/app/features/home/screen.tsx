@@ -2,139 +2,62 @@ import {
   Anchor,
   Button,
   H1,
+  H3,
+  ListItem,
   Paragraph,
   Separator,
   Sheet,
   useToastController,
   XStack,
+  YGroup,
   YStack,
 } from '@my/ui'
 import { ChevronDown, ChevronUp, X } from '@tamagui/lucide-icons'
 import { useState } from 'react'
-import { Platform } from 'react-native'
 import { useLink } from 'solito/navigation'
 
 export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
-  const linkTarget = pagesMode ? '/pages-example-user' : '/user'
-  const linkProps = useLink({
-    href: `${linkTarget}/nate`,
+  const skiaLink = useLink({
+    href: '/skia',
   })
-
   return (
     <YStack
       f={1}
-      jc='center'
       ai='center'
       gap='$8'
       p='$4'
-      bg='$background'
-      // bg='red'
+      w='100%'
+      theme='alt2'
     >
-      <XStack
-        pos='absolute'
-        w='100%'
-        t='$6'
-        gap='$6'
-        jc='center'
-        fw='wrap'
-        $sm={{ pos: 'relative', t: 0 }}
-      ></XStack>
-
-      <YStack gap='$4'>
-        <H1
-          ta='center'
-          col='$color12'
+      <XStack>
+        <H3
+          ff='$body'
+          size='$10'
+          ta='left'
+          f={1}
         >
-          Welcome to Tamagui.
-        </H1>
-        <Paragraph
-          col='$color10'
-          ta='center'
-        >
-          Here's a basic starter to show navigating from one screen to another.
-        </Paragraph>
-        <Separator />
-        <Paragraph ta='center'>
-          This screen uses the same code on Next.js and React Native.
-        </Paragraph>
-        <Separator />
-      </YStack>
-
-      <Button {...linkProps}>Link to user</Button>
-
-      <SheetDemo />
-    </YStack>
-  )
-}
-
-function SheetDemo() {
-  const toast = useToastController()
-
-  const [open, setOpen] = useState(false)
-  const [position, setPosition] = useState(0)
-
-  return (
-    <>
-      <Button
-        size='$6'
-        icon={open ? ChevronDown : ChevronUp}
-        circular
-        onPress={() => setOpen((x) => !x)}
-      />
-      <Sheet
-        modal
-        animation='medium'
-        open={open}
-        onOpenChange={setOpen}
-        snapPoints={[80]}
-        position={position}
-        onPositionChange={setPosition}
-        dismissOnSnapToBottom
-      >
-        <Sheet.Overlay
-          animation='lazy'
-          enterStyle={{ opacity: 0 }}
-          exitStyle={{ opacity: 0 }}
-        />
-        <Sheet.Handle bg='$gray8' />
-        <Sheet.Frame
-          ai='center'
-          jc='center'
-          gap='$10'
-          bg='$color2'
-        >
-          <XStack gap='$2'>
-            <Paragraph ta='center'>Made by</Paragraph>
-            <Anchor
-              col='$blue10'
-              href='https://twitter.com/natebirdman'
-              target='_blank'
-            >
-              @natebirdman,
-            </Anchor>
-            <Anchor
-              color='$purple10'
-              href='https://github.com/tamagui/tamagui'
-              target='_blank'
-              rel='noreferrer'
-            >
-              give it a ⭐️
-            </Anchor>
-          </XStack>
-
-          <Button
-            size='$6'
-            circular
-            icon={ChevronDown}
-            onPress={() => {
-              setOpen(false)
-              toast.show('Sheet closed!', {
-                message: 'Just showing how toast works...',
-              })
-            }}
+          Skia
+        </H3>
+      </XStack>
+      <YGroup elevation='$0.25'>
+        <YGroup.Item>
+          <ListItem
+            {...skiaLink}
+            title='skia'
           />
-        </Sheet.Frame>
-      </Sheet>
-    </>
+        </YGroup.Item>
+        <Separator />
+        <YGroup.Item>
+          <ListItem
+            title='Second'
+            subTitle='Second subtitle'
+          />
+        </YGroup.Item>
+        <Separator />
+        <YGroup.Item>
+          <ListItem>Third</ListItem>
+        </YGroup.Item>
+      </YGroup>
+    </YStack>
   )
 }

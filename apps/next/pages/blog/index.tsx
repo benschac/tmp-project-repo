@@ -63,13 +63,14 @@ const components = {
 export default function Page(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
+  console.log(props)
   return (
     <Layout>
       <Suspense fallback={<H1>Loading...</H1>}>
         {/* {props.source && (
           <MDXRemote
             components={components}
-            {...props.source.source}
+            {...props.source}
           />
         )} */}
         {/* <MDXRemote
