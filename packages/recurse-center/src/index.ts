@@ -8,7 +8,7 @@ import {
   TokenResponse,
 } from './types'
 import { APIError } from './error'
-import * as SDKTypes from './types'
+// export * from './types'
 
 /**
  * OAuth2Client class for interacting with the Recurse Center API.
@@ -214,4 +214,11 @@ class RecurseCenter {
   }
 }
 
-export { RecurseCenter, OAuth2Config, SDKTypes }
+export { RecurseCenter }
+export {
+  ProfilesResponse,
+  Batch,
+  LocationsResponse,
+  OAuth2Config,
+  TokenResponse,
+} from './types'

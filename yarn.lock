@@ -1495,13 +1495,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@badgateway/oauth2-client@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "@badgateway/oauth2-client@npm:2.3.0"
-  checksum: 10/5bb571e0e10fc0c2fa3116405901bc4290b1b626aa82bd84c20c63f4b4cb59d5451c898e48d69a8f8d791ac6e302b9a8c7aa57aea9fe7f1e6e41a0ff1a6387c0
-  languageName: node
-  linkType: hard
-
 "@changesets/apply-release-plan@npm:^7.0.4":
   version: 7.0.4
   resolution: "@changesets/apply-release-plan@npm:7.0.4"
@@ -16619,7 +16612,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "recurse-center@workspace:packages/recurse-center"
   dependencies:
-    "@badgateway/oauth2-client": "npm:^2.3.0"
     "@types/node": "npm:^20.14.10"
     ky: "npm:^1.4.0"
     ts-node: "npm:^10.9.2"

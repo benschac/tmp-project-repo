@@ -8,7 +8,7 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   noExternal: ['ky'], // Add any other non-native dependencies here
-  external: ['fsevents'],
+  external: ['fsevents', 'fsevents.node'],
   platform: 'node',
-  target: 'node14',
+  target: 'node20',
 })

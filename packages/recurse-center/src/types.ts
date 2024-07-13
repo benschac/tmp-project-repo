@@ -15,7 +15,7 @@ export interface OAuth2Config {
   /** The scopes requested for API access */
   scope: string
   /** The base URL for API requests, typically 'https://www.recurse.com' */
-  apiBaseUrl: string
+  apiBaseUrl: string | undefined
 }
 
 /**

@@ -1,15 +1,15 @@
 {
   "name": "recurse-center",
+  "version": "0.0.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "type": "module",
   "license": "MIT",
   "author": "benjamin",
   "scripts": {
     "dev": "tsup src/index.ts --config tsup.config.ts --watch",
     "build": "tsup src/index.ts --config tsup.config.ts",
-    "start": "node --loader ts-node/esm examples/index.ts",
+    "start": "node --loader ts-node/esm --experimental-specifier-resolution=node examples/index.ts",
     "clean": "turbo clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "docs": "typedoc"
@@ -23,13 +23,12 @@
     "typescript": "^5.5.3"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@badgateway/oauth2-client": "^2.3.0",
     "ky": "^1.4.0",
     "unfetch": "^5.0.0"
   }
