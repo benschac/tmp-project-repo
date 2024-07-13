@@ -1,0 +1,10 @@
+{
+  "entryPoints": ["./src/index.ts"],
+  "out": "docs",
+  "readme": "README.md",
+  "name": "Recurse Center API SDK",
+  "plugin": ["typedoc-plugin-markdown"],
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true
+}

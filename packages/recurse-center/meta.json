@@ -1,0 +1,4 @@
+{
+  "name": "OAuth client for recurse-center api",
+  "description": "A typescript sdk for the recurse center OAuth api"
+}
