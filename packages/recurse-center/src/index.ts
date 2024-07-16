@@ -8,8 +8,13 @@ import {
   TokenResponse,
 } from './types'
 import { APIError } from './error'
-// export * from './types'
 
+function generateRandomState(): string {
+  return (
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15)
+  )
+}
 /**
  * OAuth2Client class for interacting with the Recurse Center API.
  * This client handles OAuth 2.0 authentication and provides methods for accessing various API endpoints.
@@ -27,9 +32,18 @@ class RecurseCenter {
    */
   constructor(config: OAuth2Config) {
     this.config = { ...config, apiBaseUrl: 'https://www.recurse.com/' }
+    // this.kyInstance = ky.create({
+    //   prefixUrl: config.apiBaseUrl,
+    //   timeout: 30000, // 30 seconds timeout
+    // })
     this.kyInstance = ky.create({
-      prefixUrl: config.apiBaseUrl,
-      timeout: 30000, // 30 seconds timeout
+      prefixUrl: this.config.apiBaseUrl,
+      timeout: 30000,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      mode: 'cors',
+      credentials: 'include',
     })
   }
 
@@ -43,6 +57,7 @@ class RecurseCenter {
       redirect_uri: this.config.redirectUri,
       response_type: 'code',
       scope: this.config.scope,
+      state: generateRandomState(), // Implement this function to generate a random string
     })
 
     return `${this.config.authorizationEndpoint}?${params.toString()}`
@@ -52,10 +67,13 @@ class RecurseCenter {
    * Exchanges an authorization code for access and refresh tokens.
    *
    * @param {string} code - The authorization code received from the OAuth2 server.
-   * @returns {Promise<void>}
+   * @returns {Promise<TokenResponse>}
    * @throws {APIError} If the token exchange fails.
    *
    * @remarks
+   * IMPORTANT: This method must only be called server-side. It should never be executed in a browser environment
+   * as it requires the client secret, which must be kept secure.
+   *
    * This method uses the following parameters in the token request:
    *
    * - grant_type: Always 'authorization_code' for this request.
@@ -67,9 +85,11 @@ class RecurseCenter {
    * Ensure that your client ID, client secret, and redirect URI are correctly set
    * in your OAuth2Config when initializing the client.
    *
+   * For client-side applications, implement this exchange in a server-side API route or endpoint.
+   *
    * @see {@link https://www.recurse.com/settings/apps} for managing your app's OAuth settings.
    */
-  async exchangeCodeForTokens(code: string): Promise<void> {
+  async exchangeCodeForTokens(code: string): Promise<TokenResponse> {
     const params = new URLSearchParams({
       grant_type: 'authorization_code',
       code,
@@ -78,14 +98,21 @@ class RecurseCenter {
       client_secret: this.config.clientSecret,
     })
 
-    const response = await this.kyInstance
-      .post(this.config.tokenEndpoint, {
-        body: params,
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      })
-      .json<TokenResponse>()
+    try {
+      const response = await this.kyInstance
+        .post('oauth/token', {
+          body: params,
+        })
+        .json<TokenResponse>()
 
-    this.setTokens(response)
+      // this.setTokens(response)
+      return response
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new APIError(500, 'Internal Server Error', error.message)
+      }
+      throw error
+    }
   }
 
   /**
@@ -105,21 +132,27 @@ class RecurseCenter {
       client_secret: this.config.clientSecret,
     })
 
-    const response = await this.kyInstance
-      .post(this.config.tokenEndpoint, {
-        body: params,
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      })
-      .json<TokenResponse>()
+    try {
+      const response = await this.kyInstance
+        .post('oauth/token', {
+          body: params,
+        })
+        .json<TokenResponse>()
 
-    this.setTokens(response)
+      this.setTokens(response)
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new APIError(500, 'Internal Server Error', error.message)
+      }
+      throw error
+    }
   }
 
   /**
    * Sets the access and refresh tokens and calculates the expiration time.
    * @param {TokenResponse} tokenResponse - The response from the token endpoint.
    */
-  private setTokens(tokenResponse: TokenResponse): void {
+  public setTokens(tokenResponse: TokenResponse): void {
     this.accessToken = tokenResponse.access_token
     this.refreshToken = tokenResponse.refresh_token
     this.tokenExpirationTime = Date.now() + tokenResponse.expires_in * 1000
@@ -172,19 +205,24 @@ class RecurseCenter {
    *
    * @see {@link https://github.com/recursecenter/wiki/wiki/Recurse-Center-API#profiles} for more information on the profiles endpoint.
    */
-  async getProfiles(query?: string, role?: string): Promise<ProfilesResponse> {
+  async getProfiles(props: {
+    query?: string
+    role?: string
+    token: string
+  }): Promise<ProfilesResponse> {
+    props.token
     const accessToken = await this.getValidAccessToken()
 
     const searchParams = new URLSearchParams()
-    if (query) searchParams.set('query', query)
-    if (role) searchParams.set('role', role)
+    if (props.query) searchParams.set('query', props.query)
+    if (props.role) searchParams.set('role', props.role)
 
     return this.handleRequest(
       this.kyInstance
         .get('api/v1/profiles', {
           searchParams,
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${props.token}`,
           },
         })
         .json<ProfilesResponse>()

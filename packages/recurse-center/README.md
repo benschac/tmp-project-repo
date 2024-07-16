@@ -1,3 +1,11 @@
+# todo
+
+1. finish my own nextjs api and get a real resonse from the api
+1. refresh token
+1. disco backend
+1. react sdk
+1. react tanstack sdk
+
 # recurse-center
 
 typescript sdk to interact with [recurse-center api](https://github.com/recursecenter/wiki/wiki/Recurse-Center-API)
