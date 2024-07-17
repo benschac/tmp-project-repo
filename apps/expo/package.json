@@ -12,8 +12,10 @@
   "dependencies": {
     "@babel/runtime": "^7.24.6",
     "@expo/config-plugins": "~8.0.4",
+    "@georgedoescode/spline": "^1.0.1",
     "@my/ui": "0.0.1",
     "@shopify/react-native-skia": "1.2.3",
+    "alea": "^1.0.1",
     "app": "0.0.0",
     "babel-plugin-module-resolver": "^5.0.2",
     "burnt": "^0.12.2",
@@ -40,7 +42,8 @@
     "react-native-screens": "~3.31.1",
     "react-native-svg": "15.3.0",
     "react-native-vision-camera": "^4.4.2",
-    "react-native-web": "~0.19.12"
+    "react-native-web": "~0.19.12",
+    "simplex-noise": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.24.6",

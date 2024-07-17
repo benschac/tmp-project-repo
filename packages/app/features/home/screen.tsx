@@ -5,8 +5,10 @@ import {
   H3,
   ListItem,
   Paragraph,
+  ScrollView,
   Separator,
   Sheet,
+  Spacer,
   useToastController,
   XStack,
   YGroup,
@@ -14,9 +16,9 @@ import {
 } from '@my/ui'
 import { ChevronDown, ChevronUp, X } from '@tamagui/lucide-icons'
 import { useEffect, useState } from 'react'
-import { useLink } from 'solito/navigation'
-import { useRouter } from 'next/router'
+import { useLink, useRouter } from 'solito/navigation'
 import { RecurseCenter, OAuth2Config, TokenResponse } from 'recurse-center'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const config: OAuth2Config = {
   clientId: 'lYxmn-I2EQStfAquOLGr53pkzqru30EYQvBGACG3PMU',
@@ -76,35 +78,40 @@ async function exchangeCodeForTokens(code: string): Promise<TokenResponse> {
 // }
 export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
   const [oauthState, setOauthState] = useState<string | null>(null)
+
   const skiaLink = useLink({
     href: '/skia',
   })
+  const buttonsLink = useLink({
+    href: '/buttons',
+  })
+
   const router = useRouter()
 
-  useEffect(() => {
-    async function handleAuth() {
-      const { code, state } = router.query
-      if (
-        code &&
-        state &&
-        typeof code === 'string' &&
-        typeof state === 'string'
-      ) {
-        try {
-          const tokenResponse = await exchangeCodeForTokens(code)
-          console.log('Successfully exchanged code for tokens', tokenResponse)
-          client.setTokens(tokenResponse)
-          // client.
+  // useEffect(() => {
+  //   async function handleAuth() {
+  //     const { code, state } = router.query
+  //     if (
+  //       code &&
+  //       state &&
+  //       typeof code === 'string' &&
+  //       typeof state === 'string'
+  //     ) {
+  //       try {
+  //         const tokenResponse = await exchangeCodeForTokens(code)
+  //         console.log('Successfully exchanged code for tokens', tokenResponse)
+  //         client.setTokens(tokenResponse)
+  //         // client.
 
-          // Here you might want to save the tokens and update your app's state
-        } catch (error) {
-          console.error('Error exchanging code for tokens:', error)
-        }
-      }
-    }
+  //         // Here you might want to save the tokens and update your app's state
+  //       } catch (error) {
+  //         console.error('Error exchanging code for tokens:', error)
+  //       }
+  //     }
+  //   }
 
-    handleAuth()
-  }, [router.query, oauthState])
+  //   handleAuth()
+  // }, [router.query, oauthState])
 
   const getProfilesTest = () => {
     const authUrl = client.getAuthorizationUrl()
@@ -124,20 +131,20 @@ export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
       // body: JSON.stringify({ code: authCode2 }),
     })
   }
+  const insets = useSafeAreaInsets()
   return (
+    <ScrollView {...insets} >
+    {/* <Spacer size='$12' /> */}
     <YStack
       f={1}
       ai='center'
-      gap='$8'
       p='$4'
+      rowGap="$2"
       w='100%'
       theme='alt2'
     >
       <XStack>
-        <Button onPress={getProfilesTest}>Auth Url</Button>
-        <Button onPress={handleGetOAuthToken}>get profiles</Button>
         <H3
-          ff='$body'
           size='$10'
           ta='left'
           f={1}
@@ -146,6 +153,32 @@ export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
         </H3>
       </XStack>
       <YGroup elevation='$0.25'>
+        <YGroup.Item>
+          <ListItem
+            {...buttonsLink}
+            title='buttons'
+          />
+        </YGroup.Item>
+        <Separator />
+        <YGroup.Item>
+          <ListItem
+            title='Second'
+            subTitle='Second subtitle'
+          />
+        </YGroup.Item>
+        <Separator />
+        <YGroup.Item>
+          <ListItem>Third</ListItem>
+        </YGroup.Item>
+      </YGroup>
+      <YGroup elevation='$0.25'>
+        <H3
+          size='$10'
+          ta='left'
+          f={1}
+        >
+          Skia
+        </H3>
         <YGroup.Item>
           <ListItem
             {...skiaLink}
@@ -165,5 +198,6 @@ export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
         </YGroup.Item>
       </YGroup>
     </YStack>
+    </ScrollView>
   )
 }

@@ -2701,6 +2701,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@georgedoescode/spline@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@georgedoescode/spline@npm:1.0.1"
+  checksum: 10/338ec39290cd3bd06922e6b8c0f3333041062cf75aa2ce00f7ce10c77c59e61a8f9c3e375bbb075ef0138de480907cd743ab8241c37e21ed82b7be5548ac5a6e
+  languageName: node
+  linkType: hard
+
 "@graphql-typed-document-node/core@npm:^3.1.0":
   version: 3.2.0
   resolution: "@graphql-typed-document-node/core@npm:3.2.0"
@@ -6522,6 +6529,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"alea@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "alea@npm:1.0.1"
+  checksum: 10/b699177496913b3ea0c1e329e13cb164befb5e5a906b46299e375465a697613e6294e1d617008438d0a714c397ad17ce292ef10126fa76c1ca913e90ef28e81d
+  languageName: node
+  linkType: hard
+
 "anser@npm:^1.4.9":
   version: 1.4.10
   resolution: "anser@npm:1.4.10"
@@ -9962,9 +9976,11 @@ __metadata:
     "@babel/runtime": "npm:^7.24.6"
     "@expo/config-plugins": "npm:~8.0.4"
     "@expo/metro-config": "npm:~0.18.4"
+    "@georgedoescode/spline": "npm:^1.0.1"
     "@my/ui": "npm:0.0.1"
     "@shopify/react-native-skia": "npm:1.2.3"
     "@tamagui/babel-plugin": "npm:^1.101.3"
+    alea: "npm:^1.0.1"
     app: "npm:0.0.0"
     babel-plugin-module-resolver: "npm:^5.0.2"
     burnt: "npm:^0.12.2"
@@ -9993,6 +10009,7 @@ __metadata:
     react-native-svg: "npm:15.3.0"
     react-native-vision-camera: "npm:^4.4.2"
     react-native-web: "npm:~0.19.12"
+    simplex-noise: "npm:^4.0.2"
     typescript: "npm:^5.4.5"
   languageName: unknown
   linkType: soft
@@ -17589,6 +17606,13 @@ __metadata:
   dependencies:
     is-arrayish: "npm:^0.3.1"
   checksum: 10/c6dffff17aaa383dae7e5c056fbf10cf9855a9f79949f20ee225c04f06ddde56323600e0f3d6797e82d08d006e93761122527438ee9531620031c08c9e0d73cc
+  languageName: node
+  linkType: hard
+
+"simplex-noise@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "simplex-noise@npm:4.0.2"
+  checksum: 10/bb9d72d5fe3f8520fc2d060a30f5fb10c84f568cf2aafbd1234929bfda4b3e43c219710703119b2b37172e6f18ca3c0e1e3159aa1bb23f6b129e9bd33623619a
   languageName: node
   linkType: hard
 
