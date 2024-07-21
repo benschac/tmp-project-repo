@@ -3,15 +3,21 @@ title: Self Positioning React Components
 description: >-
   A big thanks to Dexter engineering specifically Daniel Ilkovich and David Hu
   for letting me share this code and all of their help and…
-date: "2020-03-16T05:35:07.322Z"
+date: '2020-03-16T05:35:07.322Z'
+slug: 'self-positioning-react-components'
 author:
   name: benjamin
-  picture: ""
+  picture: ''
 ogImage:
-  url: ""
+  url: ''
 ---
 
-<Image alt="react.js logo" src="/static/images/1__jDIj2SKAE__Bp32owLoHDjw.png" width={700} height={400} />
+<Image
+  alt='react.js logo'
+  src='/static/images/1__jDIj2SKAE__Bp32owLoHDjw.png'
+  width={700}
+  height={400}
+/>
 
 A big thanks to [Dexter](https://medium.com/u/10e7d71b6655) engineering specifically [Daniel Ilkovich](https://medium.com/u/5509cf8da295) and [David Hu](https://medium.com/u/41dac176c234) for letting me share this code and all of their help and support while building the user tutorial feature on our [site](http://rundexter.com).
 
@@ -22,18 +28,25 @@ While React has ways to break the hatch and directly manipulate the DOM there ar
 The grid snaps at 1024px from a fixed to a fluid grid. We wanted our tutorial tips to be 20px away from their parent element and there wasn’t a way to do this with just css. If the tip was positioned correctly in the fixed grid it would be off when the grid snapped to a fluid view.
 
 The tutorial metadata is applied directly in inline styles of the component which has the highest css specificity. This meant that media queries couldn’t solve this problem because media queries would be overridden by css with higher specificity.
-<br/>
+
+<br />
 [youtube link of the problem](https://youtu.be/9VkbXWANxvQ)
 
 ### The Solution
 
 The solution needed to be a single set of metadata and a component that knew where it was so it could change its positioning on the fly. Here’s a video of the final component styles changing.
-<br/>
+
+<br />
 [youtube link of solution](https://youtu.be/BFkJ4KjBWPo)
 
 and the component moving with the viewport resize.
 
-<Image alt="react.js logo" src="https://img.youtube.com/vi/OwGAaxtAmaQ/0.jpg" width={700} height={400} />
+<Image
+  alt='react.js logo'
+  src='https://img.youtube.com/vi/OwGAaxtAmaQ/0.jpg'
+  width={700}
+  height={400}
+/>
 
 ### Element.getClientRects()
 
@@ -41,7 +54,12 @@ First things first, we need to know where the parent element is on the page befo
 
 ![](/Users/benjaminschachter/Downloads/medium-export-53ea0a62798a34a070e02ba6c20fabcaa79f4d6071252b2620cbac428dd8bde9/posts/md_1652096354662/img/1__EkU__yoIB4aWoSRX11jYIiw.png)
 
-<Image alt="react.js logo" src="/static/images/1__EkU__yoIB4aWoSRX11jYIiw.png" width={700} height={400} />
+<Image
+  alt='react.js logo'
+  src='/static/images/1__EkU__yoIB4aWoSRX11jYIiw.png'
+  width={700}
+  height={400}
+/>
 ### Using a Stateful Component to store positioning
 
 We need the component to know where it is at all times. Thinking about that requirement we need a `class` component that can hold its own state, not a stateless functional component. This is because the user can shrink or expand their viewport past or less than the 1024px threshold which changes our grid to fluid or fixed position. The component needs to be aware of viewport size so it can hold on to its dynamically generated positioning any time the screen size changes.
@@ -150,7 +168,6 @@ componentDidMount: function () {
 ```
 
 On component load we need to `setStyles` since we currently don’t have any styles to get! Remember, the component is going to call `.getClientRect()` which is going to dynamically set positioning values. Additionally, we don’t want to query the DOM every time we resize the viewport.
-<Test />
 
 ```js
   , shouldComponentUpdate: function (nextProps, nextState) {
@@ -236,13 +253,18 @@ Here’s a diagram of our component lifecycle, getters, setters and render metho
 
 ![](/Users/benjaminschachter/Downloads/medium-export-53ea0a62798a34a070e02ba6c20fabcaa79f4d6071252b2620cbac428dd8bde9/posts/md_1652096354662/img/1__nMWbkf4UI35QyiTOTl1WWA.png)
 
-<Image alt="react.js logo" src="/static/images/1__nMWbkf4UI35QyiTOTl1WWA.png" width={700} height={400} />
+<Image
+  alt='react.js logo'
+  src='/static/images/1__nMWbkf4UI35QyiTOTl1WWA.png'
+  width={700}
+  height={400}
+/>
 ### The Entire Component
 
 ```js
-var React = require("react"),
-  _ = require("lodash"),
-  tutorialMeta = require("./tutorialMeta.json").tutorial;
+var React = require('react'),
+  _ = require('lodash'),
+  tutorialMeta = require('./tutorialMeta.json').tutorial
 
 /**
  * Tutorial Component
@@ -255,26 +277,26 @@ var React = require("react"),
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return { display: true };
+    return { display: true }
   },
   componentDidMount: function () {
-    window.addEventListener("resize", this.setStyles);
-    this.setStyles();
+    window.addEventListener('resize', this.setStyles)
+    this.setStyles()
   },
   componentWillUnmount: function () {
-    window.removeEventListener("resize", this.setStyles);
+    window.removeEventListener('resize', this.setStyles)
   },
   shouldComponentUpdate: function (nextProps, nextState) {
     return (
       !_.isEqual(nextProps, this.props) || !_.isEqual(nextState, this.state)
-    );
+    )
   },
   componentWillReceiveProps: function (nextProps) {
     if (nextProps.step !== this.props.step) {
       // Step has changed, hide the tutorial box
       this.replaceState({
         display: false,
-      });
+      })
     }
   },
   /**
@@ -285,20 +307,20 @@ module.exports = React.createClass({
   getStyles: function () {
     var self = this,
       styles = {
-        top: self.state.top || "auto",
-        bottom: self.state.bottom || "auto",
+        top: self.state.top || 'auto',
+        bottom: self.state.bottom || 'auto',
         left: self.state.left || -9999,
-        right: self.state.right || "auto",
-      };
+        right: self.state.right || 'auto',
+      }
     // Hide tutorial tip during transitions to prevent flickering.
     if (!this.state.display) {
-      styles.display = "none";
+      styles.display = 'none'
     }
 
-    return styles;
+    return styles
   },
   componentDidUpdate: function () {
-    this.setStyles();
+    this.setStyles()
   },
   /**
    * Queries the DOM and dynamically generates values to update state. These values are passed to getStyles
@@ -309,96 +331,108 @@ module.exports = React.createClass({
   setStyles: function () {
     var { step } = this.props,
       meta = tutorialMeta[step],
-      el = document.querySelector(".step" + step),
+      el = document.querySelector('.step' + step),
       // Get queried DOM element's values (top, right, left, width, etc.)
-      bounds = el && el.getBoundingClientRect();
+      bounds = el && el.getBoundingClientRect()
     if (bounds) {
       switch (meta.position) {
-        case "right":
+        case 'right':
           this.setState({
             top: Math.floor(bounds.top - meta.offsetTop),
             left: Math.floor(bounds.right + meta.offsetLeft),
             display: true,
-          });
-          break;
-        case "left":
+          })
+          break
+        case 'left':
           this.setState({
             top: Math.floor(bounds.top - meta.offsetTop),
             left: Math.floor(bounds.left + meta.offsetLeft),
             display: true,
-          });
-          break;
-        case "bottom":
+          })
+          break
+        case 'bottom':
           this.setState({
             top: Math.floor(bounds.top - meta.offsetTop),
             left: Math.floor(bounds.right - bounds.width + meta.offsetLeft),
             display: true,
-          });
-          break;
-        case "bottom-left":
+          })
+          break
+        case 'bottom-left':
           this.setState({
             top: Math.floor(bounds.top - meta.offsetTop),
             left: Math.floor(bounds.right - bounds.width + meta.offsetLeft),
             display: true,
-          });
-          break;
+          })
+          break
         default:
-          break;
+          break
       }
     }
   },
   render: function () {
-    let { step } = this.props;
+    let { step } = this.props
     var props = this.props,
       meta = tutorialMeta[step],
       parentClass = _.getClassNameFromObject({
-        "tutorial-wrap": true,
+        'tutorial-wrap': true,
       }),
       childClass = _.getClassNameFromObject({
-        "tutorial-tip": true,
-        top: _.isEqual(_.get(meta, "position"), "top"),
-        right: _.isEqual(_.get(meta, "position"), "right"),
-        bottom: _.isEqual(_.get(meta, "position"), "bottom"),
-        left: _.isEqual(_.get(meta, "position"), "left"),
-        "bottom-left": _.isEqual(_.get(meta, "position"), "bottom-left"),
+        'tutorial-tip': true,
+        top: _.isEqual(_.get(meta, 'position'), 'top'),
+        right: _.isEqual(_.get(meta, 'position'), 'right'),
+        bottom: _.isEqual(_.get(meta, 'position'), 'bottom'),
+        left: _.isEqual(_.get(meta, 'position'), 'left'),
+        'bottom-left': _.isEqual(_.get(meta, 'position'), 'bottom-left'),
       }),
       text = props.error ? meta.error : meta.text,
       btnCls = _.getClassNameFromObject({
-        "btn btn-special btn--short next": meta.nextButton,
+        'btn btn-special btn--short next': meta.nextButton,
         hidden: !meta.nextButton,
-      });
-    if (!props.visible) return null;
+      })
+    if (!props.visible) return null
 
     return (
       <div className={parentClass}>
-        <div className={childClass} style={this.getStyles()}>
+        <div
+          className={childClass}
+          style={this.getStyles()}
+        >
           <div>
-            <div className="step-info">
+            <div className='step-info'>
               <span>
-                <span className="step">
-                  <i className="fa fa-question-circle" aria-hidden="true"></i>
+                <span className='step'>
+                  <i
+                    className='fa fa-question-circle'
+                    aria-hidden='true'
+                  ></i>
                   &nbsp; Step {props.step + 1}
-                </span>{" "}
+                </span>{' '}
                 of {tutorialMeta.length}
               </span>
             </div>
-            <div className="step-text">
+            <div className='step-text'>
               <span dangerouslySetInnerHTML={{ __html: text }}></span>
             </div>
-            <div className="end-tutorial">
-              <a className="clickable" onClick={props.onTutorialFinish}>
+            <div className='end-tutorial'>
+              <a
+                className='clickable'
+                onClick={props.onTutorialFinish}
+              >
                 End tutorial
               </a>
-              <button className={btnCls} onClick={props.onTutorialNext}>
+              <button
+                className={btnCls}
+                onClick={props.onTutorialNext}
+              >
                 Next
               </button>
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   },
-});
+})
 ```
 
 ### But wait there’s more!

@@ -4,9 +4,10 @@ import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import Layout from 'components/layout'
 import { BlogScreen } from 'app/features/blog/screen'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
-import { H1, Text, Image, H3, XStack } from 'tamagui'
+import { H1, Text, Image, H3, XStack, Paragraph, YStack } from 'tamagui'
 import { getAllPosts } from '../lib/posts'
 import { Suspense } from 'react'
+import { useLink } from 'solito/navigation'
 import { GetStaticProps } from 'next'
 // type getAllPosts = ReturnType<Awaited<typeof getAllPosts>>
 type GetAllPosts = Awaited<ReturnType<typeof getAllPosts>>
@@ -15,6 +16,7 @@ type PageProps = {
   source: GetAllPosts
 }
 import type { InferGetStaticPropsType } from 'next'
+import { useRouter } from 'next/router'
 
 type Repo = {
   name: string
@@ -38,7 +40,8 @@ const components = {
   Image,
   h1: H1,
   h3: H3,
-  p: Text,
+  p: Paragraph,
+  Test: Text,
   // @ts-expect-error - not sure how to type this
   code: ({ node, inline, className, children, ...props }) => {
     const match = /language-(\w+)/.exec(className || '')
@@ -63,14 +66,34 @@ const components = {
 export default function Page(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
-  console.log(props)
   return (
     <Layout>
       <Suspense fallback={<H1>Loading...</H1>}>
-        {/* {props.source && (
+        {props.source.map((post, idx) => {
+          console.log(post, 'post')
+          const blogLink = useLink({
+            href: `/blog/${props.source[idx].source.frontmatter.slug}`,
+          })
+          return (
+            <YStack
+              key={idx}
+              {...blogLink}
+            >
+              <H3>{post.source.frontmatter.title}</H3>
+              <Paragraph>{post.source.frontmatter.subTitle}</Paragraph>
+            </YStack>
+          )
+          // return (
+          //   <MDXRemote
+          //     components={components}
+          //     {...post.source}
+          //   />
+          // )
+        })}
+        {/* {props && (
           <MDXRemote
-            components={components}
-            {...props.source}
+            // components={components}
+            {...props}
           />
         )} */}
         {/* <MDXRemote

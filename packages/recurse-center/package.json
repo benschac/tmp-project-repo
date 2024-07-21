@@ -15,12 +15,12 @@
     "docs": "typedoc"
   },
   "devDependencies": {
-    "@types/node": "^20.14.10",
+    "@types/node": "^20.14.1",
     "ts-node": "^10.9.2",
     "tsup": "^8.1.0",
     "typedoc": "^0.26.4",
     "typedoc-plugin-markdown": "^4.2.1",
-    "typescript": "^5.5.3"
+    "typescript": "~5.3.3"
   },
   "engines": {
     "node": ">=20"

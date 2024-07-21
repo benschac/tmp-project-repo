@@ -18,7 +18,7 @@ import { ChevronDown, ChevronUp, X } from '@tamagui/lucide-icons'
 import { useEffect, useState } from 'react'
 import { useLink, useRouter } from 'solito/navigation'
 import { RecurseCenter, OAuth2Config, TokenResponse } from 'recurse-center'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+// import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const config: OAuth2Config = {
   clientId: 'lYxmn-I2EQStfAquOLGr53pkzqru30EYQvBGACG3PMU',
@@ -131,15 +131,12 @@ export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
       // body: JSON.stringify({ code: authCode2 }),
     })
   }
-  const insets = useSafeAreaInsets()
   return (
-    <ScrollView {...insets} >
-    {/* <Spacer size='$12' /> */}
     <YStack
       f={1}
       ai='center'
       p='$4'
-      rowGap="$2"
+      rowGap='$2'
       w='100%'
       theme='alt2'
     >
@@ -198,6 +195,5 @@ export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
         </YGroup.Item>
       </YGroup>
     </YStack>
-    </ScrollView>
   )
 }

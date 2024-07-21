@@ -1,11 +1,13 @@
 import { useColorScheme } from 'react-native'
 import { CustomToast, TamaguiProvider, TamaguiProviderProps, ToastProvider, config } from '@my/ui'
 import { ToastViewport } from './ToastViewport'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 export function Provider({ children, ...rest }: Omit<TamaguiProviderProps, 'config'>) {
   const colorScheme = useColorScheme()
-  
+
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <TamaguiProvider config={config} defaultTheme={colorScheme === 'dark' ? 'dark' : 'light'} {...rest}>
       <ToastProvider
         swipeDirection="horizontal"
@@ -22,5 +24,6 @@ export function Provider({ children, ...rest }: Omit<TamaguiProviderProps, 'conf
         <ToastViewport />
       </ToastProvider>
     </TamaguiProvider>
+  </GestureHandlerRootView>
   )
 }

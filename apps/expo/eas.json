@@ -6,7 +6,6 @@
         "buildType": "apk"
       },
       "ios": {
-        "simulator": true,
         "image": "latest"
       }
     },

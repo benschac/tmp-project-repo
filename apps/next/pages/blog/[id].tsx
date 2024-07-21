@@ -1,44 +1,41 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
+import {
+  MDXRemote,
+  MDXRemoteProps,
+  MDXRemoteSerializeResult,
+} from 'next-mdx-remote'
 import Layout from 'components/layout'
 import { BlogScreen } from 'app/features/blog/screen'
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
-import { H1, Text, Image, H3, XStack } from 'tamagui'
-import { getAllPosts } from '../lib/posts'
+import { H1, Text, Image, H3, XStack, Paragraph } from 'tamagui'
+import { getAllPosts, getPostBySlug } from '../lib/posts'
 import { Suspense } from 'react'
 import { GetStaticProps } from 'next'
 // type getAllPosts = ReturnType<Awaited<typeof getAllPosts>>
 type GetAllPosts = Awaited<ReturnType<typeof getAllPosts>>
+type GetPostBySlug = Awaited<ReturnType<typeof getPostBySlug>>
 
 type PageProps = {
-  source: GetAllPosts
+  source: GetPostBySlug
 }
-import type { InferGetStaticPropsType } from 'next'
+import type { GetStaticPaths, InferGetStaticPropsType } from 'next'
 
 type Repo = {
   name: string
   stargazers_count: number
 }
 
-// export const getStaticProps = (async (context) => {
-//   const res = await fetch('https://api.github.com/repos/vercel/next.js')
-//   const repo = await res.json()
-//   return { props: { repo } }
-// }) satisfies GetStaticProps<{
-//   repo: Repo
-// }>
-
-export const getStaticProps = (async () => {
-  const posts = await getAllPosts()
-  return { props: { source: posts } }
-}) satisfies GetStaticProps<PageProps>
+// export const getStaticProps = (async () => {
+//   const posts = await getAllPosts()
+//   return { props: { source: posts } }
+// }) satisfies GetStaticProps<PageProps>
 
 const components = {
   Image,
   h1: H1,
   h3: H3,
-  p: Text,
+  p: Paragraph,
   // @ts-expect-error - not sure how to type this
   code: ({ node, inline, className, children, ...props }) => {
     const match = /language-(\w+)/.exec(className || '')
@@ -66,18 +63,38 @@ export default function Page(
   return (
     <Layout>
       <Suspense fallback={<H1>Loading...</H1>}>
-        {/* {props.source && (
-          <MDXRemote
-            components={components}
-            {...props.source.source}
-          />
-        )} */}
-        {/* <MDXRemote
+        <MDXRemote
+          // @ts-expect-error - tamagui props aren't matching up
+          // this is fine for the moment, text styles are rendering as expected
           components={components}
-          {...props.source}
-        /> */}
-        {/* <BlogScreen /> */}
+          {...props.source.source}
+        />
       </Suspense>
     </Layout>
   )
 }
+
+export const getStaticProps = (async (props) => {
+  const id = Array.isArray(props?.params?.id)
+    ? props?.params?.id[0]
+    : props?.params?.id
+  console.log(id, 'idddddddddd')
+  if (!id) {
+    return {
+      notFound: true,
+    }
+  }
+  const posts = await getPostBySlug(id)
+  console.log(posts)
+  return { props: { source: posts } }
+}) satisfies GetStaticProps<PageProps>
+
+export const getStaticPaths = (async () => {
+  const posts = await getAllPosts()
+  return {
+    fallback: false,
+    paths: posts.map((post) => ({
+      params: { id: post.source.frontmatter.slug },
+    })),
+  }
+}) as GetStaticPaths
