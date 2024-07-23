@@ -8,7 +8,7 @@ import {
 } from 'next-mdx-remote'
 import Layout from 'components/layout'
 import { BlogScreen } from 'app/features/blog/screen'
-import { H1, Text, Image, H3, XStack, Paragraph } from 'tamagui'
+import { H1, Text, Image, H3, XStack, Paragraph, Spacer, YStack } from 'tamagui'
 import { getAllPosts, getPostBySlug } from '../lib/posts'
 import { Suspense } from 'react'
 import { GetStaticProps } from 'next'
@@ -32,8 +32,16 @@ type Repo = {
 // }) satisfies GetStaticProps<PageProps>
 
 const components = {
-  Image,
+  Image: (props: unknown) => (
+    <Image
+      maxWidth='100%'
+      objectFit='cover'
+      // @ts-expect-error - tamagui props aren't matching up
+      {...props}
+    />
+  ),
   h1: H1,
+  Spacer,
   h3: H3,
   p: Paragraph,
   // @ts-expect-error - not sure how to type this
@@ -62,14 +70,19 @@ export default function Page(
 ) {
   return (
     <Layout>
-      <Suspense fallback={<H1>Loading...</H1>}>
-        <MDXRemote
-          // @ts-expect-error - tamagui props aren't matching up
-          // this is fine for the moment, text styles are rendering as expected
-          components={components}
-          {...props.source.source}
-        />
-      </Suspense>
+      <YStack
+        mx='auto'
+        width='80ch'
+      >
+        <Suspense fallback={<H1>Loading...</H1>}>
+          <MDXRemote
+            // @ts-expect-error - tamagui props aren't matching up
+            // this is fine for the moment, text styles are rendering as expected
+            components={components}
+            {...props.source.source}
+          />
+        </Suspense>
+      </YStack>
     </Layout>
   )
 }
@@ -78,14 +91,12 @@ export const getStaticProps = (async (props) => {
   const id = Array.isArray(props?.params?.id)
     ? props?.params?.id[0]
     : props?.params?.id
-  console.log(id, 'idddddddddd')
   if (!id) {
     return {
       notFound: true,
     }
   }
   const posts = await getPostBySlug(id)
-  console.log(posts)
   return { props: { source: posts } }
 }) satisfies GetStaticProps<PageProps>
 

@@ -4,5 +4,11 @@
     "composite": true,
     "jsx": "react-jsx"
   },
-  "references": []
+  "references": [],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ]
 }

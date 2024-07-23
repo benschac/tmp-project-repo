@@ -17,10 +17,10 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
   return (
     <>
       <Head>
-        <title>Tamagui • Pages Router</title>
+        <title>bensch.ac</title>
         <meta
-          name='description'
-          content='Tamagui, Solito, Expo & Next.js'
+          name='developer living in new york city'
+          content='a personal blog and portfolio'
         />
         <link
           rel='icon'

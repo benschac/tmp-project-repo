@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, Dimensions, useWindowDimensions } from 'react-native'
+import Spline from './skia/spline'
 import {
   BALL_COLOR,
   startColors,
@@ -51,6 +52,7 @@ import {
   GestureHandlerRootView,
   Gesture,
 } from 'react-native-gesture-handler'
+import { YStack } from '@my/ui'
 interface Prop {
   idx: number
   brick: BrickInterface
@@ -159,7 +161,8 @@ export default function Screen() {
           headerShown: false,
         }}
       />
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <Spline />
+      {/* <GestureHandlerRootView style={{ flex: 1 }}>
         <GestureDetector gesture={gesture}>
           <Canvas
             style={{
@@ -193,7 +196,7 @@ export default function Screen() {
             })}
           </Canvas>
         </GestureDetector>
-      </GestureHandlerRootView>
+      </GestureHandlerRootView> */}
     </>
   )
 }

@@ -4,7 +4,7 @@ import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import Layout from 'components/layout'
 import { BlogScreen } from 'app/features/blog/screen'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
-import { H1, Text, Image, H3, XStack, Paragraph, YStack } from 'tamagui'
+import { H1, Text, Image, H3, XStack, Paragraph, YStack, H5 } from 'tamagui'
 import { getAllPosts } from '../lib/posts'
 import { Suspense } from 'react'
 import { useLink } from 'solito/navigation'
@@ -32,7 +32,12 @@ type Repo = {
 // }>
 
 export const getStaticProps = (async () => {
-  const posts = await getAllPosts()
+  const posts = (await getAllPosts()).sort((a, b) => {
+    return (
+      new Date(b.source.frontmatter.date as string).getTime() -
+      new Date(a.source.frontmatter.date as string).getTime()
+    )
+  })
   return { props: { source: posts } }
 }) satisfies GetStaticProps<PageProps>
 
@@ -69,38 +74,46 @@ export default function Page(
   return (
     <Layout>
       <Suspense fallback={<H1>Loading...</H1>}>
-        {props.source.map((post, idx) => {
-          console.log(post, 'post')
-          const blogLink = useLink({
-            href: `/blog/${props.source[idx].source.frontmatter.slug}`,
-          })
-          return (
-            <YStack
-              key={idx}
-              {...blogLink}
-            >
-              <H3>{post.source.frontmatter.title}</H3>
-              <Paragraph>{post.source.frontmatter.subTitle}</Paragraph>
-            </YStack>
-          )
-          // return (
-          //   <MDXRemote
-          //     components={components}
-          //     {...post.source}
-          //   />
-          // )
-        })}
-        {/* {props && (
-          <MDXRemote
-            // components={components}
-            {...props}
-          />
-        )} */}
-        {/* <MDXRemote
-          components={components}
-          {...props.source}
-        /> */}
-        {/* <BlogScreen /> */}
+        <YStack
+          pt='$4'
+          mx='auto'
+          rowGap='$4'
+        >
+          {props.source.map((post, idx) => {
+            const blogLink = useLink({
+              href: `/blog/${props.source[idx].source.frontmatter.slug}`,
+            })
+            const { title, date, description, tags } = post.source.frontmatter
+            return (
+              <YStack
+                key={idx}
+                {...blogLink}
+              >
+                <H3>{title}</H3>
+                <H5 size='$1'>
+                  {new Date(date as string).toLocaleDateString()}
+                </H5>
+                <XStack columnGap='$2'>
+                  {/* @ts-expect-error */}
+                  {tags?.map((tag: string, idx: number) => {
+                    return (
+                      <Paragraph
+                        themeInverse
+                        bg='$background'
+                        key={idx}
+                        px='$2'
+                        size='$1'
+                      >
+                        {tag}
+                      </Paragraph>
+                    )
+                  })}
+                </XStack>
+                <Paragraph>{description}</Paragraph>
+              </YStack>
+            )
+          })}
+        </YStack>
       </Suspense>
     </Layout>
   )

@@ -70,10 +70,10 @@ const Header = () => {
       <YStack
         zi={1}
         backdropFilter='blur(3.8px)'
+        // @ts-expect-error TODO: add sticky to tamagui core
         pos='sticky'
         t='$4'
         bg='rgba(255, 255, 255, 0.07)'
-        mx='$4'
         borderRadius='$4'
         borderWidth='$1'
         borderColor='$color'
@@ -177,11 +177,16 @@ const Header = () => {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <YStack bg='$background'>
-      <Header />
-      <YStack>
+    <Theme name='red'>
+      <YStack
+        f={1}
+        px='$4'
+        bg='$background'
+      >
+        <Header />
+        <Spacer size='$4' />
         <YStack tag='main'>{children}</YStack>
       </YStack>
-    </YStack>
+    </Theme>
   )
 }
