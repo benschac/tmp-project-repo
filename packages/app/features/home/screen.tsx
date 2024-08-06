@@ -148,6 +148,7 @@ export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
         >
           Skia
         </H3>
+        <H1>Home</H1>
       </XStack>
       <YGroup elevation='$0.25'>
         <YGroup.Item>

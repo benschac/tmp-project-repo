@@ -3,10 +3,11 @@ import { createInterFont } from '@tamagui/font-inter'
 import { shorthands } from '@tamagui/shorthands'
 import { tokens, themes } from '@tamagui/config/v3'
 import { createMedia } from '@tamagui/react-native-media-driver'
+import { createPlayfairDisplayFont } from '@tamagui-google-fonts/playfair-display'
 
 import { animations } from '@my/ui/src/animations'
 
-const headingFont = createInterFont({
+const headingFont = createPlayfairDisplayFont({
   size: {
     6: 15,
   },
@@ -26,15 +27,21 @@ const headingFont = createInterFont({
     5: 2,
     6: 1,
     7: 0,
+    true: 2,
     8: -1,
     9: -2,
-    10: -3,
+    10: 0,
     12: -4,
     14: -5,
     15: -6,
   },
   face: {
-    700: { normal: 'InterBold' },
+    400: { normal: 'PlayfairDisplay' },
+    500: { normal: 'PlayfairDisplayMedium' },
+    600: { normal: 'PlayfairDisplaySemiBold' },
+    700: { normal: 'PlayfairDisplayBold' },
+    800: { normal: 'PlayfairDisplayExtraBold' },
+    900: { normal: 'PlayfairDisplayBlack' },
   },
 })
 

@@ -3,6 +3,7 @@ module.exports = function (api) {
   return {
     presets: [['babel-preset-expo', { jsxRuntime: 'automatic' }]],
     plugins: [
+      '@babel/plugin-proposal-export-namespace-from',
       [
         require.resolve('babel-plugin-module-resolver'),
         {
@@ -16,7 +17,7 @@ module.exports = function (api) {
         },
       ],
       // if you want reanimated support
-      // 'react-native-reanimated/plugin',
+      'react-native-reanimated/plugin',
       ...(process.env.EAS_BUILD_PLATFORM === 'android'
         ? []
         : [

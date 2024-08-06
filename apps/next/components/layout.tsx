@@ -106,6 +106,8 @@ const Header = () => {
                 x={headerHover ? 4 : 0}
                 pos='absolute'
                 color='$color'
+                fontFamily='$body'
+                size='$9'
                 animation='slow'
               >
                 bensch.ac
@@ -116,6 +118,8 @@ const Header = () => {
                 y={headerHover ? -4 : 0}
                 x={headerHover ? 4 : 0}
                 color='$color'
+                fontFamily='$body'
+                size='$9'
                 animation='slow'
               >
                 bensch.ac
@@ -127,6 +131,8 @@ const Header = () => {
                 x={0}
                 color='$color'
                 animation='slow'
+                fontFamily='$body'
+                size='$9'
                 pos='absolute'
               >
                 bensch.ac
@@ -137,6 +143,8 @@ const Header = () => {
                 y={headerHover ? -2 : 0}
                 x={headerHover ? 2 : 0}
                 color='$color'
+                fontFamily='$body'
+                size='$9'
                 animation='slow'
                 pos='absolute'
               >
@@ -147,6 +155,8 @@ const Header = () => {
               <H3
                 y={headerHover ? -4 : 0}
                 x={headerHover ? 4 : 0}
+                fontFamily='$body'
+                size='$9'
                 animation='slow'
                 pos='absolute'
                 color='$color'
@@ -158,6 +168,8 @@ const Header = () => {
               y={headerHover ? -6 : 0}
               x={headerHover ? 6 : 0}
               animation='slow'
+              fontFamily='$body'
+              size='$9'
               pos='absolute'
               color='$color'
             >
@@ -177,16 +189,29 @@ const Header = () => {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Theme name='red'>
-      <YStack
-        f={1}
-        px='$4'
-        bg='$background'
-      >
-        <Header />
-        <Spacer size='$4' />
-        <YStack tag='main'>{children}</YStack>
-      </YStack>
-    </Theme>
+    <YStack
+      mih='100vh'
+      px='$4'
+      bg='blue'
+    >
+      <Theme name='green'>
+        <Theme name='alt1'>
+          <Spacer size='$4' />
+          <YStack
+            f={1}
+            bg='$background'
+          >
+            <Header />
+            <Spacer size='$4' />
+            <YStack
+              f={1}
+              tag='main'
+            >
+              {children}
+            </YStack>
+          </YStack>
+        </Theme>
+      </Theme>
+    </YStack>
   )
 }

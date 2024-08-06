@@ -4,7 +4,19 @@ const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   webpack: (config, { isServer }) => {
-    // Fixes npm packages (mdx) that depend on `fs` module
+    // config.module.rules.push({
+    //   test: /\.(glsl|vs|fs|vert|frag)$/,
+    //   type: 'asset/source',
+    //   generator: {
+    //     filename: 'static/chunks/[path][name].[hash][ext]',
+    //   },
+    // })
+
+    config.module.rules.push({
+      test: /\.(glsl|vs|fs|vert|frag)$/,
+      exclude: /node_modules/,
+      use: ['raw-loader', 'glslify-loader'],
+    })
     if (!isServer) {
       config.resolve.fallback.fs = false
     }

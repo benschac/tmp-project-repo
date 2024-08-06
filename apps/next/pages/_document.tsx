@@ -27,7 +27,7 @@ export default class Document extends NextDocument {
     const styles = [
       getStyleElement(),
       <style
-        key="tamagui-css"
+        key='tamagui-css'
         dangerouslySetInnerHTML={{
           __html: config.getCSS({
             exclude:
@@ -53,11 +53,16 @@ export default class Document extends NextDocument {
       <Html>
         <Head>
           <meta
-            httpEquiv="X-UA-Compatible"
-            content="IE=edge"
+            httpEquiv='X-UA-Compatible'
+            content='IE=edge'
           />
         </Head>
-        <body>
+        <body
+          style={{
+            flex: 1,
+            background: 'red',
+          }}
+        >
           <Main />
           <NextScript />
         </body>
