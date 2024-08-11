@@ -15,6 +15,8 @@ import React, {
 } from 'react'
 import { PanInfo, motion, useSpring, useTransform } from 'framer-motion'
 import normalizeWheel from 'normalize-wheel'
+import generateRssFeed from 'utils/rss'
+import { getAllPosts } from './lib/posts'
 const MarqueeContainer = styled(motion.div, {
   // p: '$4',
   borderColor: '$color',
@@ -109,7 +111,8 @@ const MarqueeItem: React.FC<MarqueeItemProps> = ({
   )
 }
 
-export default function Page() {
+export default function Page(props) {
+  console.log(props)
   const { width, height } = useWindowSize()
   const speed = useSpring(_.speed, {
     stiffness: 100,
@@ -182,6 +185,7 @@ export default function Page() {
 
     console.log('onPointerUp', x.current)
   }
+  // console.log(props.allPosts)
 
   return (
     <Layout>
@@ -280,4 +284,12 @@ export default function Page() {
       </YStack>
     </Layout>
   )
+}
+export const getStaticProps = async () => {
+  const allPosts = await getAllPosts()
+
+  generateRssFeed(allPosts)
+  return {
+    props: { allPosts },
+  }
 }
