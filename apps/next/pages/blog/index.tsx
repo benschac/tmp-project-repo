@@ -101,6 +101,7 @@ export default function Page(
             return (
               <>
                 <YStack
+                  cursor='pointer'
                   key={idx}
                   {...blogLink}
                 >

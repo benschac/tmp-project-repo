@@ -8,13 +8,29 @@ import {
 } from 'next-mdx-remote'
 import Layout from 'components/layout'
 import { BlogScreen } from 'app/features/blog/screen'
-import { H1, Text, Image, H3, XStack, Paragraph, Spacer, YStack } from 'tamagui'
+import {
+  H1,
+  Text,
+  Image,
+  H3,
+  XStack,
+  Paragraph as OGParagraph,
+  Spacer,
+  YStack,
+  styled,
+  ListItem,
+  H2,
+} from 'tamagui'
 import { getAllPosts, getPostBySlug } from '../lib/posts'
 import { Suspense } from 'react'
 import { GetStaticProps } from 'next'
 // type getAllPosts = ReturnType<Awaited<typeof getAllPosts>>
 type GetAllPosts = Awaited<ReturnType<typeof getAllPosts>>
 type GetPostBySlug = Awaited<ReturnType<typeof getPostBySlug>>
+
+const Paragraph = styled(OGParagraph, {
+  fontSize: '$5',
+})
 
 type PageProps = {
   source: GetPostBySlug
@@ -41,9 +57,11 @@ const components = {
     />
   ),
   h1: H1,
+  h2: H2,
   Spacer,
   h3: H3,
   p: Paragraph,
+  li: ListItem,
   // @ts-expect-error - not sure how to type this
   code: ({ node, inline, className, children, ...props }) => {
     const match = /language-(\w+)/.exec(className || '')
@@ -72,6 +90,7 @@ export default function Page(
     <Layout>
       <YStack
         mx='auto'
+        // @ts-expect-error
         width='80ch'
       >
         <Suspense fallback={<H1>Loading...</H1>}>

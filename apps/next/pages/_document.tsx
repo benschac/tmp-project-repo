@@ -41,6 +41,12 @@ export default class Document extends NextDocument {
       >{`
         html {
           font-family: 'Inter';
+          overflow: hidden;
+        }
+
+        html,
+        body {
+          overscroll-behavior-x: none;
         }
       `}</style>,
     ]
@@ -60,7 +66,6 @@ export default class Document extends NextDocument {
         <body
           style={{
             flex: 1,
-            background: 'red',
           }}
         >
           <Main />

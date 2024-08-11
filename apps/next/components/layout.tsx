@@ -110,7 +110,7 @@ const Header = () => {
                 size='$9'
                 animation='slow'
               >
-                bensch.ac
+                {'bensch.ac'}
               </H3>
             </Theme>
             <Theme name={orderOfThemes[3]}>
@@ -122,7 +122,7 @@ const Header = () => {
                 size='$9'
                 animation='slow'
               >
-                bensch.ac
+                {'bensch.ac'}
               </H3>
             </Theme>
             <Theme name={orderOfThemes[2]}>
@@ -130,12 +130,13 @@ const Header = () => {
                 y={0}
                 x={0}
                 color='$color'
+                letterSpacing={-0.4}
                 animation='slow'
                 fontFamily='$body'
                 size='$9'
                 pos='absolute'
               >
-                bensch.ac
+                {'bensch.ac'}
               </H3>
             </Theme>
             <Theme name={orderOfThemes[1]}>
@@ -143,12 +144,13 @@ const Header = () => {
                 y={headerHover ? -2 : 0}
                 x={headerHover ? 2 : 0}
                 color='$color'
+                letterSpacing={-0.4}
                 fontFamily='$body'
                 size='$9'
                 animation='slow'
                 pos='absolute'
               >
-                bensch.ac
+                {'bensch.ac'}
               </H3>
             </Theme>
             <Theme name={orderOfThemes[0]}>
@@ -161,20 +163,22 @@ const Header = () => {
                 pos='absolute'
                 color='$color'
               >
-                bensch.ac
+                {'bensch.ac'}
               </H3>
             </Theme>
-            <H3
-              y={headerHover ? -6 : 0}
-              x={headerHover ? 6 : 0}
-              animation='slow'
-              fontFamily='$body'
-              size='$9'
-              pos='absolute'
-              color='$color'
-            >
-              bensch.ac
-            </H3>
+            <Theme>
+              <H3
+                y={headerHover ? -6 : 0}
+                x={headerHover ? 6 : 0}
+                animation='slow'
+                fontFamily='$body'
+                size='$9'
+                pos='absolute'
+                color='$color'
+              >
+                {'bensch.ac'}
+              </H3>
+            </Theme>
           </View>
           <Spacer flex />
           <Link href='/about'>about</Link>
@@ -190,17 +194,15 @@ const Header = () => {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <YStack
+      br='$radius.2'
+      bg='$backgroundFocus'
       mih='100vh'
       px='$4'
-      bg='blue'
     >
       <Theme name='green'>
         <Theme name='alt1'>
           <Spacer size='$4' />
-          <YStack
-            f={1}
-            bg='$background'
-          >
+          <YStack f={1}>
             <Header />
             <Spacer size='$4' />
             <YStack

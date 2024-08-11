@@ -198,11 +198,6 @@ export interface Profile {
 }
 
 /**
- * Represents the response from the profiles endpoint.
- */
-export type ProfilesResponse = Profile[]
-
-/**
  * Represents a batch at the Recurse Center.
  */
 export interface Batch {
@@ -231,6 +226,91 @@ export interface Location {
   /** Type of the location (e.g., 'city') */
   type: string
 }
+/**
+ * Represents a person in the Recurse Center API.
+ */
+export interface Person {
+  /** Unique identifier for the person */
+  id: number
+  /** Person's first name */
+  first_name: string
+  /** Person's middle name */
+  middle_name: string | null
+  /** Person's last name */
+  last_name: string
+  /** Person's email address */
+  email: string
+  /** Person's Twitter handle */
+  twitter: string | null
+  /** Person's GitHub username */
+  github: string | null
+  /** ID of the batch the person is associated with */
+  batch_id: number | null
+  /** Person's phone number */
+  phone_number: string
+  /** Indicates if the person has a photo */
+  has_photo: boolean
+  /** Person's interests */
+  interests: string | null
+  /** Person's experience before RC */
+  before_rc: string | null
+  /** Person's experience during RC */
+  during_rc: string | null
+  /** Indicates if the person is faculty */
+  is_faculty: boolean
+  /** Indicates if the person is a Recurse Center participant */
+  is_hacker_schooler: boolean
+  /** Person's current job */
+  job: string | null
+  /** URL of the person's image */
+  image: string
+  /** Associated batch information */
+  batch: Batch | null
+  /** Person's pseudonym */
+  pseudonym: string
+  /** Person's current location */
+  current_location: CurrentLocation | null
+  /** Array of the person's stints */
+  stints: Stint[]
+  /** Array of batches the person has been part of */
+  batches: { id: number; name: string }[]
+  /** Array of the person's projects */
+  projects: any[] // The exact structure wasn't provided in the docs
+  /** Array of the person's links */
+  links: any[] // The exact structure wasn't provided in the docs
+  /** Array of the person's skills */
+  skills: any[] // The exact structure wasn't provided in the docs
+  /** Person's biography */
+  bio: string | null
+}
+
+/**
+ * Represents a hub visit in the Recurse Center API.
+ */
+export interface HubVisit {
+  /** The person associated with this hub visit */
+  person: {
+    id: number
+    name: string
+  }
+  /** The date of the hub visit */
+  date: string
+  /** Application-specific data associated with the visit */
+  app_data: Record<string, any>
+  /** Notes for the hub visit */
+  notes: string
+  /** Timestamp when the hub visit was created */
+  created_at: string
+  /** Timestamp when the hub visit was last updated */
+  updated_at: string
+  /** The app that created this hub visit, if any */
+  created_by_app: string | null
+  /** The app that last updated this hub visit, if any */
+  updated_by_app: string | null
+}
+
+// Update ProfilesResponse to be more specific
+export type ProfilesResponse = Profile[]
 
 /**
  * Represents the response from the locations endpoint.

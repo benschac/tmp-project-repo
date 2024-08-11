@@ -1,0 +1,177 @@
+{
+  "basics": {
+    "name": "Benjamin Schachter",
+    "label": "Software Engineer",
+    "url": "Benjaminschachter.com",
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "benschac",
+        "url": "Github.com/benschac"
+      },
+      {
+        "network": "Medium",
+        "username": "@benschac",
+        "url": "Medium.com/@benschac"
+      }
+    ],
+    "location": {
+      "city": "New York",
+      "region": "NY"
+    }
+  },
+  "work": [
+    {
+      "company": "Freelance Software Consultant",
+      "position": "Software Engineer",
+      "url": "Benjaminschachter.com",
+      "startDate": "2024-01-02",
+      "endDate": "2024-04-02",
+      "summary": "React Native software development for various organizations",
+      "highlights": ["", ""]
+    },
+    {
+      "company": "Entropy Cryptography",
+      "position": "Software Engineer",
+      "url": "entropy.xyz",
+      "startDate": "2022-12-01",
+      "endDate": "2024-01-02",
+      "summary": "Trustless and secure crypto custody for everyone.",
+      "highlights": [
+        "Built several initial prototypes of a Web and Native product used both for user research and technical proof of concepts.",
+        "Added, modified, typed, and tested functionality of the entropy typescript SDK."
+      ]
+    },
+    {
+      "company": "Part-time Freelance",
+      "position": "Software development consulting",
+      "startDate": "2022-06-01",
+      "endDate": "2022-12-31",
+      "summary": "Various organizations, including a well-known creator content platform."
+    },
+    {
+      "company": "Comm",
+      "position": "Software Engineer",
+      "url": "comm.app",
+      "startDate": "2021-10-01",
+      "endDate": "2022-06-30",
+      "summary": "Open-source crypto native chat (web3 discord).",
+      "highlights": [
+        "Rewrote the comm.app using modern CSS / HTML / JavaScript.",
+        "Reimplemented front-end code on our legacy web application and built feature parity on the web and native products."
+      ]
+    },
+    {
+      "company": "Maple",
+      "position": "Software Engineer",
+      "url": "growmaple.com",
+      "startDate": "2020-10-01",
+      "endDate": "2021-09-30",
+      "summary": "Making all parents' lives easier.",
+      "highlights": [
+        "Second engineering hire, building and launching the Maple product using React Native, GraphQL, styled- components, Jest, react-native-testing-library and TypeScript.",
+        "Worked collaboratively to iteratively and continually build the mobile UIs and create the user experience."
+      ]
+    },
+    {
+      "company": "WeWork | Prolific Interactive (Acquired by WeWork)",
+      "position": "Software Engineer",
+      "startDate": "2019-03-01",
+      "endDate": "2020-09-30",
+      "summary": "Revolutionizing the way people and companies work.",
+      "highlights": [
+        "Rebuilt the member experience-messaging platform supporting real-time group messaging and encrypted user media.",
+        "Led front-end development on WeWork Now, WeWork's platform for on-demand co-working."
+      ]
+    },
+    {
+      "company": "Freelance",
+      "position": "Software development consulting",
+      "startDate": "2018-06-01",
+      "endDate": "2019-03-31",
+      "summary": "Various Organizations: LedgerX (Now Miax derivatives exchange), Zeel Networks, Rose Digital"
+    },
+    {
+      "company": "Dexter",
+      "position": "Software Engineer",
+      "url": "rundexter.com",
+      "startDate": "2017-05-01",
+      "endDate": "2018-05-31",
+      "summary": "The platform for businesses, brands, and people to create meaningful automated conversations.",
+      "highlights": [
+        "Built analytics view that can search, edit, and sort bot data with infinite scroll.",
+        "Implemented a new design for the advanced page, command center, platforms configuration panel, and status sidebar features."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Recurse Center",
+      "area": "Software Engineering",
+      "studyType": "Self-Directed",
+      "startDate": "",
+      "endDate": "",
+      "score": "",
+      "courses": []
+    },
+    {
+      "institution": "Purchase College, State University of New York",
+      "area": "Economics",
+      "studyType": "Bachelors of Arts",
+      "endDate": "2012-05-31",
+      "courses": []
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming Languages",
+      "keywords": ["TypeScript", "Node", "Rust", "Solidity"]
+    },
+    {
+      "name": "Web Technologies",
+      "keywords": [
+        "CSS",
+        "React",
+        "React Native",
+        "Redux",
+        "GraphQL",
+        "Styled-Components"
+      ]
+    },
+    {
+      "name": "Testing",
+      "keywords": ["Jest", "Testing Library"]
+    },
+    {
+      "name": "Tools",
+      "keywords": ["Git"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Tamagui",
+      "description": "A style library, UI kit and compiler for Universal React Applications.",
+      "type": "Open Source",
+      "url": "https://tamagui.dev"
+    },
+    {
+      "name": "Turbo-Props",
+      "description": "A Post-it® sized wrapper around styled-components to turbocharge your workflow.",
+      "type": "Open Source"
+    },
+    {
+      "name": "juicebox.money",
+      "description": "A programmable crypto fundraising platform for web3.",
+      "type": "Open Source",
+      "url": "https://juicebox.money"
+    }
+  ],
+  "publications": [
+    {
+      "name": "Self Positioning Components",
+      "publisher": "Hackernoon, freeCodeCamp News",
+      "releaseDate": "",
+      "summary": "Brooklyn.js Speaker"
+    }
+  ]
+}
