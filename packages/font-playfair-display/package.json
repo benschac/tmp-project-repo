@@ -18,8 +18,8 @@
     "clean:build": "tamagui-build clean:build"
   },
   "peerDependencies": {
-    "@tamagui/core": "*",
-    "@tamagui/build": "*"
+    "@tamagui/build": "*",
+    "@tamagui/core": "*"
   },
   "devDependencies": {
     "subset-font": "^1.6.1"

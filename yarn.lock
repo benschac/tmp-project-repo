@@ -6138,9 +6138,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tamagui-google-fonts/playfair-display@workspace:packages/font-playfair-display"
   dependencies:
-    "@tamagui/build": "npm:*"
     subset-font: "npm:^1.6.1"
   peerDependencies:
+    "@tamagui/build": "*"
     "@tamagui/core": "*"
   languageName: unknown
   linkType: soft
@@ -6322,29 +6322,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tamagui/build@npm:*, @tamagui/build@npm:1.103.2":
-  version: 1.103.2
-  resolution: "@tamagui/build@npm:1.103.2"
-  dependencies:
-    "@babel/core": "npm:^7.23.3"
-    "@tamagui/babel-plugin-fully-specified": "npm:1.103.2"
-    "@types/fs-extra": "npm:^9.0.13"
-    babel-plugin-fully-specified: "npm:*"
-    chokidar: "npm:^3.5.2"
-    esbuild: "npm:^0.23.0"
-    esbuild-plugin-es5: "npm:^2.1.0"
-    esbuild-register: "npm:^3.5.0"
-    execa: "npm:^5.0.0"
-    fast-glob: "npm:^3.2.11"
-    fs-extra: "npm:^11.2.0"
-    lodash.debounce: "npm:^4.0.8"
-  bin:
-    tamagui-build: tamagui-build.js
-    teesx: teesx.sh
-  checksum: 10/0b422a3628d943353f50ec3e06b3cef203452627a7cdbc3eac08a3ea19217e62d55de7b74e94405fd04346902912c549f8426570fe2c5bdde3704b993042ffe6
-  languageName: node
-  linkType: hard
-
 "@tamagui/build@npm:1.101.3, @tamagui/build@npm:^1.101.3":
   version: 1.101.3
   resolution: "@tamagui/build@npm:1.101.3"
@@ -6366,6 +6343,29 @@ __metadata:
     tamagui-build: tamagui-build.js
     teesx: teesx.sh
   checksum: 10/0a340b07888bbb6536ebb034bce73ce93f5646734fb2f77197446eb6060f8f50fc58933cf935bca90b4c589172b876d099dde10717925f9b89f0138b86de3ec6
+  languageName: node
+  linkType: hard
+
+"@tamagui/build@npm:1.103.2":
+  version: 1.103.2
+  resolution: "@tamagui/build@npm:1.103.2"
+  dependencies:
+    "@babel/core": "npm:^7.23.3"
+    "@tamagui/babel-plugin-fully-specified": "npm:1.103.2"
+    "@types/fs-extra": "npm:^9.0.13"
+    babel-plugin-fully-specified: "npm:*"
+    chokidar: "npm:^3.5.2"
+    esbuild: "npm:^0.23.0"
+    esbuild-plugin-es5: "npm:^2.1.0"
+    esbuild-register: "npm:^3.5.0"
+    execa: "npm:^5.0.0"
+    fast-glob: "npm:^3.2.11"
+    fs-extra: "npm:^11.2.0"
+    lodash.debounce: "npm:^4.0.8"
+  bin:
+    tamagui-build: tamagui-build.js
+    teesx: teesx.sh
+  checksum: 10/0b422a3628d943353f50ec3e06b3cef203452627a7cdbc3eac08a3ea19217e62d55de7b74e94405fd04346902912c549f8426570fe2c5bdde3704b993042ffe6
   languageName: node
   linkType: hard
 
@@ -18864,7 +18864,7 @@ __metadata:
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
     react-native: "npm:0.74.3"
-    react-native-reanimated: "npm:^3.14.0"
+    react-native-reanimated: "npm:~3.10.1"
     react-native-web: "npm:~0.19.12"
     react-native-web-lite: "npm:^1.101.3"
     react-syntax-highlighter: "npm:^15.5.0"
@@ -20778,26 +20778,6 @@ __metadata:
   peerDependencies:
     react: ^16.6.0 || ^17.0.0 || ^18.0.0
   checksum: 10/217bd0eaa61d426a512634369c70c44ce8b92127ec626dc40c65b72b1be1534ed3ed00ba2dd1a9ad77d1716ce8fd1e6db3f7209534303a652d9932a962d2c830
-  languageName: node
-  linkType: hard
-
-"react-native-reanimated@npm:^3.14.0":
-  version: 3.14.0
-  resolution: "react-native-reanimated@npm:3.14.0"
-  dependencies:
-    "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
-    "@babel/plugin-transform-nullish-coalescing-operator": "npm:^7.0.0-0"
-    "@babel/plugin-transform-optional-chaining": "npm:^7.0.0-0"
-    "@babel/plugin-transform-shorthand-properties": "npm:^7.0.0-0"
-    "@babel/plugin-transform-template-literals": "npm:^7.0.0-0"
-    "@babel/preset-typescript": "npm:^7.16.7"
-    convert-source-map: "npm:^2.0.0"
-    invariant: "npm:^2.2.4"
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-    react: "*"
-    react-native: "*"
-  checksum: 10/b780949f52bb0d66521c973173d01776febbedffa4ee86309f31b2cf6b1cae2d0a0b7e6a177c2dbc5f6d92ba3912b6b8bde9b3b42dd39fc0ef792acbd909096b
   languageName: node
   linkType: hard
 
