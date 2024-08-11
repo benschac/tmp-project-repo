@@ -6138,9 +6138,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tamagui-google-fonts/playfair-display@workspace:packages/font-playfair-display"
   dependencies:
+    "@tamagui/build": "npm:^1.101.3"
     subset-font: "npm:^1.6.1"
   peerDependencies:
-    "@tamagui/build": "*"
     "@tamagui/core": "*"
   languageName: unknown
   linkType: soft
